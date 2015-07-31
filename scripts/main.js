@@ -9,7 +9,8 @@ function preload() {
 }
 
 function update() {
-	if(light){
+	if(light){				// TODO REMOVE IF
 		updateShadowTexture();
 	}
+
 }
