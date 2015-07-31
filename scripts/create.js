@@ -1,10 +1,13 @@
 //creates world
-var light = false;
+var light = true;
+var fuel = 300;
+var timer;
+
+var starttTime;
 function create(){
 	//game.physics	
-
 	game.add.sprite(0, 0, 'background');
-
+	startTime = game.time.time;
 	player = game.add.sprite(game.width/2, game.height/2, 'space_ship'); 	
 	
 	for (var i = 0; i < 10; i++) {
@@ -23,7 +26,7 @@ function create(){
 		console.log(light);
 		game.stage.backgroundColor = 0x4488cc;
 
-		game.LIGHT_RADIUS = 100;
+		//game.LIGHT_RADIUS = 300;
 
 		game.shadowTexture = game.add.bitmapData(game.width,game.height);
 
@@ -34,10 +37,15 @@ function create(){
 	}
 	
 }
+
 	
 
+function movement(){
 
-function updateShadowTexture(){
+}
+function updateShadowTexture(lightra){
+	game.LIGHT_RADIUS = lightra;
+	console.log(game.LIGHT_RADIUS)
 	game.shadowTexture.context.fillStyle = 'rgb(0,0,0)';
 	game.shadowTexture.context.fillRect(0,0,game.width,game.height);
 
@@ -45,5 +53,7 @@ function updateShadowTexture(){
 	game.shadowTexture.context.fillStyle = 'rgb(255,255,255)';
 	game.shadowTexture.context.arc(player.x+player.width/2,player.y+player.height/2,game.LIGHT_RADIUS,0,Math.PI*2);
 	game.shadowTexture.context.fill();
-}
 
+	game.shadowTexture.dirty = true;
+	console.log(game.shadowTexture)
+}
