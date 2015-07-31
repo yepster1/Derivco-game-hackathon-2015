@@ -26,7 +26,7 @@ function create(){
 		}
 	};
 
-	if(light){
+	if(light_enabled){
 		game.stage.backgroundColor = 0x4488cc;
 		game.shadowTexture = game.add.bitmapData(game.width,game.height);
 		var lightSprite = game.add.image(0,0,game.shadowTexture);

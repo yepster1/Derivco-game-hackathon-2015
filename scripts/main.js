@@ -15,7 +15,7 @@ function preload() {
 function update() {
 	if (gameover == false){
 		life -=difference;
-		if(light){
+		if(light_enabled){
 			updateShadowTexture(life);
 		}
 		if(life == 10){
