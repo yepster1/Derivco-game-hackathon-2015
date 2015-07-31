@@ -1,6 +1,6 @@
 //creates world
 
-var light_enabled = false;
+var light_enabled = true;
 var max_asteroids = 20;
 var light         = true;
 var fuel          = 300;
