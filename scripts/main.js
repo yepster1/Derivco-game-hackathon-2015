@@ -7,7 +7,7 @@ function preload() {
 	// all the sprites.
 	game.load.image('background', 'assets/starBackground.png');
     game.load.image('asteroid_big', 'assets/meteorBig.png');
-    game.load.image('asteroid_small', 'assets/meteorSmall.png');
+    game.load.image('asteroid_small', 'assets/meteorSmall.png');    
     game.load.image('space_ship', 'assets/player.png');
 
     //TODO shield
@@ -29,7 +29,7 @@ function update() {
     }
     else
     {
-        player.body.acceleration.set(0);
+        player.body.acceleration.set(1);
     }
 
     if (cursors.left.isDown)
