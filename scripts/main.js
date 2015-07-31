@@ -2,9 +2,9 @@
 function preload() {
 	// all the sprites.
 	game.load.image('background', 'assets/starBackground.png');
-    game.load.image('asteriod_big', 'assets/meteorBig.png');
-    game.load.image('asteriod_big', 'assets/meteorSmall.png');
-    game.load.spritesheet('space_ship', 'assets/player.png', 32, 48);
+    game.load.image('asteroid_big', 'assets/meteorBig.png');
+    game.load.image('asteroid_small', 'assets/meteorSmall.png');
+    game.load.image('space_ship', 'assets/player.png');
 }
 
 function update() {
