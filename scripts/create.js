@@ -5,7 +5,12 @@ var timer;
 
 var starttTime;
 function create(){
-	//game.physics	
+	//game.physics
+	game.renderer.clearBeforeRender = false;
+    game.renderer.roundPixels = true;	
+	game.physics.startSystem(Phaser.Physics.ARCADE);
+
+	game.physics.enable(sprite, Phaser.Physics.ARCADE);
 	game.add.sprite(0, 0, 'background');
 	startTime = game.time.time;
 	player = game.add.sprite(game.width/2, game.height/2, 'space_ship'); 	
@@ -55,5 +60,4 @@ function updateShadowTexture(lightra){
 	game.shadowTexture.context.fill();
 
 	game.shadowTexture.dirty = true;
-	console.log(game.shadowTexture)
 }
