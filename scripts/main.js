@@ -5,8 +5,11 @@ function preload() {
     game.load.image('asteroid_big', 'assets/meteorBig.png');
     game.load.image('asteroid_small', 'assets/meteorSmall.png');
     game.load.image('space_ship', 'assets/player.png');
+    //TODO shield
 }
 
 function update() {
-
+	if(light){
+		updateShadowTexture();
+	}
 }
