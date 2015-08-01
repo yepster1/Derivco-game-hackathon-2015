@@ -1,4 +1,4 @@
-function createAsteroid(){
+function createAsteroid(){									//Creates asteroids checking to see the ship is not there
 	var valx = Math.round(Math.random()*game.width)+1;
 		var valy = Math.round(Math.random()*game.height)+1;		
 		while(player.x -136 < valx && valx < player.x){
