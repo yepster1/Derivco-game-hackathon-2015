@@ -5,11 +5,13 @@ var max_asteroids = 20;
 var fuel          = 300;
 var starttTime;
 var light         = true;
-var max_velocity  = 75;
+var max_velocity  = 150;
 var drag          = 50;
-
-function create(){	
-	game.add.sprite(0, 0, 'background');		
+		
+function create(){
+	sound = game.add.sound('audio');
+	sound.play();
+	game.add.sprite(0, 0, 'background'); 		
 	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');
 	player.anchor.set(0.5, 0.5);	
 	player.scale.setTo(0.6,0.6);	

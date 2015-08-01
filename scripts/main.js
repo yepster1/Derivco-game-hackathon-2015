@@ -2,35 +2,37 @@
 var gameover = false;
 var life = 300;
 var difference = 0.1;
-var acceleration_max = 0.001;
-
+var acceleration_max = 1;
+var sound;
+var blast;
 function preload() {
 	// all the sprites.
+	
+	game.load.image('plus', 'assets/plus.png');
 	game.load.image('background', 'assets/starBackground.png');
     game.load.image('asteroid_big', 'assets/meteorBig.png');
     game.load.image('asteroid_small', 'assets/meteorSmall.png');    
     game.load.image('space_ship', 'assets/player.png');
-
+	game.load.audio('audio', "assets/rocket.mp3");
+	game.load.audio('blast', "assets/blast.mp3");
     //TODO shield
 }
 
 function update() {
 	if (gameover == false){
 		life -=difference;
-		if(light_enabled){
-			updateShadowTexture(life);
-		}
-		
+		if(light_enabled)	updateShadowTexture(life);		
 	if(life < 10){
 		gameover = true;
 	}
 	if (cursors.up.isDown)
     {    	
+    	sound.resume();    	
         game.physics.arcade.accelerationFromRotation(player.rotation, 200, player.body.acceleration);
-    }
-    else
+    }else
     {
-        //player.body.acceleration.set(acceleration_max);
+    	sound.pause();
+        player.body.acceleration.set(acceleration_max);
     }
 
     if (cursors.left.isDown)
