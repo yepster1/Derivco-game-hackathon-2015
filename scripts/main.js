@@ -2,6 +2,7 @@
 var gameover = false;
 var life = 300;
 var difference = 0.1;
+var acceleration_max = 0.001;
 
 function preload() {
 	// all the sprites.
@@ -15,7 +16,7 @@ function preload() {
 
 function update() {
 	if (gameover == false){
-		//life -=difference;
+		life -=difference;
 		if(light_enabled){
 			updateShadowTexture(life);
 		}
@@ -24,13 +25,12 @@ function update() {
 		gameover = true;
 	}
 	if (cursors.up.isDown)
-    {
-    	var p = new Phaser.Point(player.x, player.y)
+    {    	
         game.physics.arcade.accelerationFromRotation(player.rotation, 200, player.body.acceleration);
     }
     else
     {
-        player.body.acceleration.set(1);
+        //player.body.acceleration.set(acceleration_max);
     }
 
     if (cursors.left.isDown)
@@ -70,3 +70,4 @@ function screenWrap (player) {
     }
 
 }
+
