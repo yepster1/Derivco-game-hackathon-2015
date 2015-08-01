@@ -2,41 +2,48 @@
 
 var light_enabled = true;
 var max_asteroids = 20;
-var fuel = 300;
+var fuel          = 300;
 var starttTime;
-var player;
 var light         = true;
-
+var max_velocity  = 150;
+var drag          = 50;
+		
 function create(){
-	//game.physics
 	sound = game.add.sound('audio');
 	blast = game.add.sound('blast');
 	sound.play();
-	game.add.sprite(0, 0, 'background');
-	//playerfail = game.add.sprite(game.width/2, game.height/2, 'space_ship'); 		
-	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');
-	player.anchor.set(0.5);
-	//playerfail.kill();
+	game.add.sprite(0, 0, 'background'); 
 
-	
-	startTime = game.time.time;
+	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');
+	player.animations.add('walk', [1, 2],10, true);
+	player.animations.add('still', [0],10, true);
+	player.animations.add('exposion', [3],10, true);
+	player.anchor.set(0.5, 0.5);	
+	player.scale.setTo(0.6,0.6);	
+	game.physics.arcade.enable(player);
 	movement();
-	startTime                  = game.time.time;
+
+	startTime = game.time.time;
 	for (var i= 0; i < max_asteroids; i++) {	//Create Initial asteroids
 		createAsteroid();
+		game.physics.arcade.enable(asteroids[i]);
 	};
 	game.add.sprite(Math.round(Math.random()*game.width)+1,
 			Math.round(Math.random()*game.height)+1, 'plus')
+	centre();
 	if(light_enabled){							//Create light/Shadow texture
 		game.stage.backgroundColor = 0x4488cc;
 		game.shadowTexture         = game.add.bitmapData(game.width,game.height);
 		var lightSprite            = game.add.image(0,0,game.shadowTexture);
 		lightSprite.blendMode      = Phaser.blendModes.MULTIPLY;		
-	}
-	
+	}			
 }
 
-
+function centre(){
+	game.scale.pageAlignHorizontally = true;
+	game.scale.pageAlignVertically = true;
+	game.scale.refresh();
+}
 
 function movement(){
 	game.renderer.clearBeforeRender = false;
@@ -44,9 +51,8 @@ function movement(){
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	game.physics.enable(player, Phaser.Physics.ARCADE);	
-
-	//player.drag.set(100);
-    //player.maxVelocity.set(200);
+	player.body.drag.set(drag);
+    player.body.maxVelocity.set(max_velocity);
 	cursors = game.input.keyboard.createCursorKeys();
 }
 
@@ -60,3 +66,4 @@ function updateShadowTexture(lightra){
 	game.shadowTexture.context.fill();
 	game.shadowTexture.dirty = true;
 }
+
