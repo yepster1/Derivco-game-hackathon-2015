@@ -6,13 +6,16 @@ var fuel = 300;
 var starttTime;
 var player;
 var light         = true;
-var fuel          = 300;
 
 function create(){
 	//game.physics
 	
 	game.add.sprite(0, 0, 'background');
-	player = game.add.sprite(game.width/2, game.height/2, 'space_ship'); 		
+	//playerfail = game.add.sprite(game.width/2, game.height/2, 'space_ship'); 		
+	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');
+	player.anchor.set(0.5);
+	//playerfail.kill();
+
 	
 	startTime = game.time.time;
 	movement();
@@ -25,8 +28,7 @@ function create(){
 		game.shadowTexture         = game.add.bitmapData(game.width,game.height);
 		var lightSprite            = game.add.image(0,0,game.shadowTexture);
 		lightSprite.blendMode      = Phaser.blendModes.MULTIPLY;		
-	}	
-	
+	}
 	
 }
 

@@ -15,7 +15,7 @@ function preload() {
 
 function update() {
 	if (gameover == false){
-		life -=difference;
+		//life -=difference;
 		if(light_enabled){
 			updateShadowTexture(life);
 		}
@@ -25,6 +25,7 @@ function update() {
 	}
 	if (cursors.up.isDown)
     {
+    	var p = new Phaser.Point(player.x, player.y)
         game.physics.arcade.accelerationFromRotation(player.rotation, 200, player.body.acceleration);
     }
     else
