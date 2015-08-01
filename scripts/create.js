@@ -2,12 +2,13 @@
 
 var light_enabled = true;
 var max_asteroids = 15;
+var max_pickups   = 2;
 var fuel          = 300;
 var starttTime;
 var light         = true;
 var max_velocity  = 150;
 var drag          = 50;
-var bulletTime = 0;
+var bulletTime    = 0;
 		
 function create(){
 	sound = game.add.sound('audio');		// setting up sound
@@ -25,11 +26,27 @@ function create(){
 	game.physics.arcade.enable(player);	//setting physcis of the ship
 	
 	movement();
-	create_drop();	
+		
 	startTime = game.time.time;
-
+	pickups = game.add.group();
+	pickups.enableBody = true;
 	asteroids = game.add.group();
 	asteroids.enableBody = true;
+	create_drop();
+	bullets = game.add.group();
+	bullets.enableBody = true;
+	bullets.physicsBodyType = Phaser.Physics.ARCADE;
+
+	bullets.createMultiple(40, 'bullet');
+    bullets.setAll('anchor.x', 0.5);
+    bullets.setAll('anchor.y', 0.5);
+    bullets.setAll('scale.x', 0.5);
+    bullets.setAll('scale.y', 0.5);
+
+	cursors = game.input.keyboard.createCursorKeys();
+	game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+
+
 	
 	for (var i= 0; i < max_asteroids; i++) {	//Create Initial asteroids
 		createAsteroid();		
@@ -69,4 +86,21 @@ function updateShadowTexture(lightra){					//Shadow texture setup
 	game.shadowTexture.context.arc(player.x,player.y,game.LIGHT_RADIUS,0,Math.PI*2);
 	game.shadowTexture.context.fill();
 	game.shadowTexture.dirty = true;
+}
+
+
+function fireBullet(){
+	if (game.time.now > bulletTime)
+    {
+        bullet = bullets.getFirstExists(false);
+
+        if (bullet)
+        {
+            bullet.reset(player.body.x + 16, player.body.y + 16);
+            bullet.lifespan = 2000;
+            bullet.rotation = player.rotation;
+            game.physics.arcade.velocityFromRotation(player.rotation, 400, bullet.body.velocity);
+            bulletTime = game.time.now + 50;
+        }
+    }
 }
