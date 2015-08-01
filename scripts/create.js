@@ -7,6 +7,7 @@ var starttTime;
 var light         = true;
 var max_velocity  = 150;
 var drag          = 50;
+var bulletTime = 0;
 		
 function create(){
 	sound = game.add.sound('audio');
@@ -20,17 +21,19 @@ function create(){
 	player.animations.add('exposion', [3],10, true);
 	player.anchor.set(0.5, 0.5);	
 	player.scale.setTo(0.6,0.6);	
+	
 	game.physics.arcade.enable(player);
 	movement();
-
 	startTime = game.time.time;
+
+	asteroids = game.add.group();
+	asteroids.enableBody = true;
+	
 	for (var i= 0; i < max_asteroids; i++) {	//Create Initial asteroids
-		createAsteroid();
-		game.physics.arcade.enable(asteroids[i]);
+		createAsteroid();		
 	};
-	game.add.sprite(Math.round(Math.random()*game.width)+1,
-			Math.round(Math.random()*game.height)+1, 'plus')
-	centre();
+	create_drop()
+	centreCanvas();
 	if(light_enabled){							//Create light/Shadow texture
 		game.stage.backgroundColor = 0x4488cc;
 		game.shadowTexture         = game.add.bitmapData(game.width,game.height);
@@ -39,7 +42,7 @@ function create(){
 	}			
 }
 
-function centre(){
+function centreCanvas(){
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
 	game.scale.refresh();
@@ -49,11 +52,10 @@ function movement(){
 	game.renderer.clearBeforeRender = false;
     game.renderer.roundPixels = true;	
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-
 	game.physics.enable(player, Phaser.Physics.ARCADE);	
 	player.body.drag.set(drag);
     player.body.maxVelocity.set(max_velocity);
-	cursors = game.input.keyboard.createCursorKeys();
+    cursors = game.input.keyboard.createCursorKeys();	
 }
 
 function updateShadowTexture(lightra){
@@ -66,4 +68,3 @@ function updateShadowTexture(lightra){
 	game.shadowTexture.context.fill();
 	game.shadowTexture.dirty = true;
 }
-
