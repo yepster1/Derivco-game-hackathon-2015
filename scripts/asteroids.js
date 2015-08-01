@@ -1,10 +1,10 @@
 function createAsteroid(){
 	var valx = Math.round(Math.random()*game.width)+1;
 		var valy = Math.round(Math.random()*game.height)+1;		
-		while(player.x -136 < valx && valx < player.x){
+		while(player.x -140 < valx && valx < player.x){
 			 valx = Math.round(Math.random()*game.width)+1;
 		}
-		while(player.y -111 < valy && valy < player.y){
+		while(player.y -125 < valy && valy < player.y){
 			 valy = Math.round(Math.random()*game.height)+1;
 		}
 	if((Math.round(Math.random()*3)+1) == 1){	

@@ -42,13 +42,12 @@ function update() {
 	    screenWrap(player);	 
 
 	    game.physics.arcade.overlap(player, asteroids, collide, null, game);	    
-		    
 	}else{
+		player.body.angularVelocity = 0;	   
 		life = 0;
 	}
 }
 function screenWrap (player) {
-
     if (player.x < 0)
     {
         player.x = game.width;
@@ -57,7 +56,6 @@ function screenWrap (player) {
     {
         player.x = 0;
     }
-
     if (player.y < 0)
     {
         player.y = game.height;
@@ -66,6 +64,5 @@ function screenWrap (player) {
     {
         player.y = 0;
     }
-
 }
 
