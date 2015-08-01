@@ -10,6 +10,7 @@ var light         = true;
 function create(){
 	//game.physics
 	sound = game.add.sound('audio');
+	blast = game.add.sound('blast');
 	sound.play();
 	game.add.sprite(0, 0, 'background');
 	//playerfail = game.add.sprite(game.width/2, game.height/2, 'space_ship'); 		
@@ -24,6 +25,8 @@ function create(){
 	for (var i= 0; i < max_asteroids; i++) {	//Create Initial asteroids
 		createAsteroid();
 	};
+	game.add.sprite(Math.round(Math.random()*game.width)+1,
+			Math.round(Math.random()*game.height)+1, 'plus')
 	if(light_enabled){							//Create light/Shadow texture
 		game.stage.backgroundColor = 0x4488cc;
 		game.shadowTexture         = game.add.bitmapData(game.width,game.height);
