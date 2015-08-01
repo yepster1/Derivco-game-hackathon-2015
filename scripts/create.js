@@ -11,9 +11,14 @@ var bulletTime = 0;
 		
 function create(){
 	sound = game.add.sound('audio');
+	blast = game.add.sound('blast');
 	sound.play();
-	game.add.sprite(0, 0, 'background'); 		
+	game.add.sprite(0, 0, 'background'); 
+
 	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');
+	player.animations.add('walk', [1, 2],10, true);
+	player.animations.add('still', [0],10, true);
+	player.animations.add('exposion', [3],10, true);
 	player.anchor.set(0.5, 0.5);	
 	player.scale.setTo(0.6,0.6);	
 	
@@ -26,17 +31,18 @@ function create(){
 	
 	for (var i= 0; i < max_asteroids; i++) {	//Create Initial asteroids
 		createAsteroid();		
-	}
+	};
+	create_drop()
+	centreCanvas();
 	if(light_enabled){							//Create light/Shadow texture
 		game.stage.backgroundColor = 0x4488cc;
 		game.shadowTexture         = game.add.bitmapData(game.width,game.height);
 		var lightSprite            = game.add.image(0,0,game.shadowTexture);
 		lightSprite.blendMode      = Phaser.blendModes.MULTIPLY;		
-	}	
-	centre();		
+	}			
 }
 
-function centre(){
+function centreCanvas(){
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
 	game.scale.refresh();
