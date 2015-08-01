@@ -9,7 +9,8 @@ var light         = true;
 
 function create(){
 	//game.physics
-	
+	sound = game.add.sound('audio');
+	sound.play();
 	game.add.sprite(0, 0, 'background');
 	//playerfail = game.add.sprite(game.width/2, game.height/2, 'space_ship'); 		
 	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');
@@ -52,7 +53,7 @@ function updateShadowTexture(lightra){
 	game.shadowTexture.context.fillRect(0,0,game.width,game.height);
 	game.shadowTexture.context.beginPath();
 	game.shadowTexture.context.fillStyle = 'rgb(255,255,255)';
-	game.shadowTexture.context.arc(player.x+player.width/2,player.y+player.height/2,game.LIGHT_RADIUS,0,Math.PI*2);
+	game.shadowTexture.context.arc(player.x,player.y,game.LIGHT_RADIUS,0,Math.PI*2);
 	game.shadowTexture.context.fill();
 	game.shadowTexture.dirty = true;
 }

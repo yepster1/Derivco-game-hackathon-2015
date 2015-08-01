@@ -2,14 +2,18 @@
 var gameover = false;
 var life = 300;
 var difference = 0.1;
-
+var sound;
+var blast;
 function preload() {
 	// all the sprites.
+	
+	game.load.image('plus', 'assets/plus.png');
 	game.load.image('background', 'assets/starBackground.png');
     game.load.image('asteroid_big', 'assets/meteorBig.png');
     game.load.image('asteroid_small', 'assets/meteorSmall.png');    
     game.load.image('space_ship', 'assets/player.png');
-
+	game.load.audio('audio', "assets/rocket.mp3");
+	game.load.audio('blast', "assets/blast.mp3");
     //TODO shield
 }
 
@@ -25,11 +29,14 @@ function update() {
 	}
 	if (cursors.up.isDown)
     {
+    	//sound.play();
+    	sound.resume();
     	var p = new Phaser.Point(player.x, player.y)
         game.physics.arcade.accelerationFromRotation(player.rotation, 200, player.body.acceleration);
     }
     else
     {
+    	sound.pause();
         player.body.acceleration.set(1);
     }
 
