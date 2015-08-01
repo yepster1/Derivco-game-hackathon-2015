@@ -7,6 +7,7 @@ var starttTime;
 var light         = true;
 var max_velocity  = 150;
 var drag          = 50;
+var bulletTime = 0;
 		
 function create(){
 	sound = game.add.sound('audio');
@@ -15,21 +16,24 @@ function create(){
 	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');
 	player.anchor.set(0.5, 0.5);	
 	player.scale.setTo(0.6,0.6);	
+	
 	game.physics.arcade.enable(player);
 	movement();
-
 	startTime = game.time.time;
+
+	asteroids = game.add.group();
+	asteroids.enableBody = true;
+	
 	for (var i= 0; i < max_asteroids; i++) {	//Create Initial asteroids
-		createAsteroid();
-		game.physics.arcade.enable(asteroids[i]);
-	};
-	centre();
+		createAsteroid();		
+	}
 	if(light_enabled){							//Create light/Shadow texture
 		game.stage.backgroundColor = 0x4488cc;
 		game.shadowTexture         = game.add.bitmapData(game.width,game.height);
 		var lightSprite            = game.add.image(0,0,game.shadowTexture);
 		lightSprite.blendMode      = Phaser.blendModes.MULTIPLY;		
-	}			
+	}	
+	centre();		
 }
 
 function centre(){
@@ -42,11 +46,10 @@ function movement(){
 	game.renderer.clearBeforeRender = false;
     game.renderer.roundPixels = true;	
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-
 	game.physics.enable(player, Phaser.Physics.ARCADE);	
 	player.body.drag.set(drag);
     player.body.maxVelocity.set(max_velocity);
-	cursors = game.input.keyboard.createCursorKeys();
+    cursors = game.input.keyboard.createCursorKeys();	
 }
 
 function updateShadowTexture(lightra){
@@ -59,4 +62,3 @@ function updateShadowTexture(lightra){
 	game.shadowTexture.context.fill();
 	game.shadowTexture.dirty = true;
 }
-

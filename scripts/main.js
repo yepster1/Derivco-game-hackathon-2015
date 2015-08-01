@@ -1,10 +1,11 @@
 //The preload function is run at the very start, in order to import the sprites and all the starting variables
 var gameover = false;
 var life = 300;
-var difference = 0.1;
+var difference = 0.3;
 var acceleration_max = 1;
 var sound;
 var blast;
+
 function preload() {
 	// all the sprites.
 	
@@ -13,6 +14,7 @@ function preload() {
     game.load.image('asteroid_big', 'assets/meteorBig.png');
     game.load.image('asteroid_small', 'assets/meteorSmall.png');    
     game.load.image('space_ship', 'assets/player.png');
+    
 	game.load.audio('audio', "assets/rocket.mp3");
 	game.load.audio('blast', "assets/blast.mp3");
     //TODO shield
@@ -20,35 +22,39 @@ function preload() {
 
 function update() {
 	if (gameover == false){
-		life -=difference;
-		if(light_enabled)	updateShadowTexture(life);		
-	if(life < 10){
-		gameover = true;
-	}
-	if (cursors.up.isDown)
-    {    	
-    	sound.resume();    	
-        game.physics.arcade.accelerationFromRotation(player.rotation, 200, player.body.acceleration);
-    }else
-    {
-    	sound.pause();
-        player.body.acceleration.set(acceleration_max);
-    }
+			life -=difference;
+			if(light_enabled)	updateShadowTexture(life);		
+		if(life < 10){
+			gameover = true;
+		}
+		if (cursors.up.isDown)
+	    {    	
+	    	sound.resume();    	
+	        game.physics.arcade.accelerationFromRotation(player.rotation, 200, player.body.acceleration);
+	    }else
+	    {
+	    	sound.pause();
+	        player.body.acceleration.set(acceleration_max);
+	    }
 
-    if (cursors.left.isDown)
-    {
-        player.body.angularVelocity = -300;
-    }
-    else if (cursors.right.isDown)
-    {
-        player.body.angularVelocity = 300;
-    }
-    else
-    {
-        player.body.angularVelocity = 0;
-    }
+	    if (cursors.left.isDown)
+	    {
+	        player.body.angularVelocity = -300;
+	    }
+	    else if (cursors.right.isDown)
+	    {
+	        player.body.angularVelocity = 300;
+	    }
+	    else
+	    {
+	        player.body.angularVelocity = 0;
+	    }
+	    screenWrap(player);	 
 
-    screenWrap(player);
+	    game.physics.arcade.overlap(player, asteroids, collide, null, game);	    
+	    
+	}else{
+		life = 0;
 	}
 }
 function screenWrap (player) {

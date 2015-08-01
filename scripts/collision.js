@@ -1,0 +1,5 @@
+function collide(){
+	gameover = true;
+
+}
+
