@@ -1,13 +1,30 @@
 //By Oliver De Bruin and Cary Small from UCT	
+gameover          = false;
+	render            = true;
+	light             = 300;
+	debug     		  = true;
+	difference        = 0.3;
+	max_acceleration  = 1;
+	ammo              = 6;
+	max_asteroids     = 15;
+	max_pickups       = 2;		
+	max_velocity      = 150;
+	drag              = 50;
+	bulletTime        = 0;
+	pickup_bonus_ammo = 5;
+	pickup_bonus_life = 100;
 function create(){
 	sound = game.add.sound('audio');		// setting up sound
 	blast = game.add.sound('blast');
-	pew = game.add.sound('pew');
-	
+	pew   = game.add.sound('pew');
+	theme = game.add.sound('theme');	
+	theme.play();
 	sound.play();
+	
 	game.add.sprite(0, 0, 'background'); 
 
 	player = game.add.sprite(game.width/2, game.height/2, 'space_ship');	//Animation for rocket ship
+
 	player.animations.add('walk', [1, 2],10, true);
 	player.animations.add('still', [0],10, true);
 	player.animations.add('exposion', [3],10, true);
@@ -15,9 +32,9 @@ function create(){
 	player.scale.setTo(0.6,0.6);	
 	
 	game.physics.arcade.enable(player);	//setting physcis of the ship
+	player.body.setSize(player.width*0.999, player.height*0.999, player.width*0.001, player.height*0.001); //chaning bounds
 	
-	movement();
-		
+	movement();		
 	startTime               = game.time.time;
 	pickups                 = game.add.group();				//Intialising pickups
 	pickups.enableBody      = true;
@@ -45,10 +62,10 @@ function create(){
 	};
 	
 	centreCanvas();
-	if(light_enabled){							//Create light/Shadow texture
+	if(!debug){							//Create light/Shadow texture
 		game.stage.backgroundColor = 0x4488cc;
 		game.shadowTexture         = game.add.bitmapData(game.width,game.height);
-		var lightSprite            = game.add.image(0,0,game.shadowTexture);
+		lightSprite            = game.add.image(0,0,game.shadowTexture);
 		lightSprite.blendMode      = Phaser.blendModes.MULTIPLY;		
 	}			
 }
@@ -96,4 +113,14 @@ function fireBullet(){
 			bulletTime      = game.time.now + 50;
         }
     }
+}
+
+function render(){
+	console.log("test");
+	game.debug.bodyInfo(player, 32, 32);
+	game.debug.body(player);
+	asteroids.forEach(	function(asteroid)	{
+		game.debug.body(asteroid)
+	});
+
 }

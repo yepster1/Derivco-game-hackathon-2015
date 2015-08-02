@@ -1,21 +1,4 @@
 //By Oliver De Bruin and Cary Small from UCT
-var gameover          = false;
-var life              = 300;
-var difference        = 0.3;
-var max_acceleration  = 1;
-var ammo              = 6;
-var light_enabled     = true;
-var max_asteroids     = 15;
-var max_pickups       = 2;
-var starttTime;
-var light             = true;
-var max_velocity      = 150;
-var drag              = 50;
-var bulletTime        = 0;
-var pickup_bonus_ammo = 5;
-var pickup_bonus_life = 100;
-
-
 function preload() {	
 	game.load.image('plus', 'assets/plus.png');					//loading of resources
 	game.load.image('background', 'assets/starBackground.png');
@@ -28,15 +11,21 @@ function preload() {
 	game.load.audio('end', "assets/sound/end.mp3");
 	game.load.audio('pew', 'assets/sound/pew.mp3');
 	game.load.audio('theme', 'assets/sound/theme.mp3');
-	game.load.audio('gameover', 'assets/sound/gameover.mp3');    
+	//game.load.audio('gameover', 'assets/sound/gameover.mp3');    
 }
-
 
 function update() {
 	if (gameover == false){			// Check whether the game is over, if not contiue to update lighting
-		life -=difference;			// and do all the collision detections and sound 
-		if(light_enabled)	updateShadowTexture(life);		
-		if(life < 10)	gameover = true;	
+									// and do all the collision detections and sound 
+		if(!debug){
+			light -=difference;	
+			updateShadowTexture(light);	
+		}		
+		if(light < 10){
+			gameover = true;
+			light = 0;
+			playGameover();
+		}		
 		if (cursors.up.isDown)
 	    {    	
 	    	player.animations.play('walk', 20, true);
@@ -48,8 +37,8 @@ function update() {
 	    	sound.pause();
 	        player.body.acceleration.set(max_acceleration);
 	    }
-	    if (cursors.left.isDown)	player.body.angularVelocity = -300;	    
-	    else if (cursors.right.isDown)	player.body.angularVelocity = 300;
+	    if (cursors.left.isDown)	player.body.angularVelocity = -100;	    
+	    else if (cursors.right.isDown)	player.body.angularVelocity = 100;
 	    else	player.body.angularVelocity = 0;
 	    screenWrap(player);
 	      bullets.forEachExists(screenWrap, this);
@@ -57,23 +46,25 @@ function update() {
 	    	if(ammo > 0) {
 	    		fireBullet(); 
 	    		ammo--;
-	    		console.log(ammo);
 	    	}	
 	    } 	    
 	    asteroids.forEachExists(screenWrap, this);  //Screen wrapping to make asteroids go to top of screen when at edge
 	    game.physics.arcade.overlap(player, asteroids, collideAsteroid, null, this);	    //collision detections
 		game.physics.arcade.overlap(player, pickups, collidePickup, null, this);	
 		game.physics.arcade.overlap(bullets, asteroids, collideBulletAsteroid, null, this);
-	}else	{
-		life = 0;		
-		
+	}else{
+		sound.pause();
+		blast.pause();
 	}
 }
+
 function screenWrap (sprite) {				//Wraps sprites that reach the edge of the screen
 	if (sprite.x < 0)	sprite.x                 = game.width;
 	else if (sprite.x > game.width)	sprite.x     = 0;
 	if (sprite.y < 0)	sprite.y                 = game.height;
 	else if (sprite.y > game.height)	sprite.y = 0;
-
 }
 
+function playGameover(){
+	theme.pause();	
+}

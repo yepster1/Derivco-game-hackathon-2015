@@ -4,6 +4,7 @@ function collideAsteroid(){ //Collision call back for overlap between rocket shi
 	sound.pause();
 	player.animations.play('exposion', 20, true);		
 	gameover = true;
+	playGameover();
 }
 
 function collidePickup(){					//Collision of rocket with pickup - > callback of overlap
