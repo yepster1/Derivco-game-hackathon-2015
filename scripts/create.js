@@ -1,5 +1,5 @@
 //By Oliver De Bruin and Cary Small from UCT	
-gameover          = false;
+	gameover          = false;
 	render            = true;
 	light             = 300;
 	debug     		  = true;

@@ -37,8 +37,8 @@ function update() {
 	    	sound.pause();
 	        player.body.acceleration.set(max_acceleration);
 	    }
-	    if (cursors.left.isDown)	player.body.angularVelocity = -100;	    
-	    else if (cursors.right.isDown)	player.body.angularVelocity = 100;
+	    if (cursors.left.isDown)	player.body.angularVelocity = -300;	    
+	    else if (cursors.right.isDown)	player.body.angularVelocity = 300;
 	    else	player.body.angularVelocity = 0;
 	    screenWrap(player);
 	      bullets.forEachExists(screenWrap, this);
@@ -54,7 +54,7 @@ function update() {
 		game.physics.arcade.overlap(bullets, asteroids, collideBulletAsteroid, null, this);
 	}else{
 		sound.pause();
-		blast.pause();
+		//blast.pause();
 	}
 }
 
