@@ -122,5 +122,4 @@ function render(){
 	asteroids.forEach(	function(asteroid)	{
 		game.debug.body(asteroid)
 	});
-
 }
