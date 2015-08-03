@@ -30,7 +30,7 @@ function update() {
 	    {    	
 	    	player.animations.play('walk', 20, true);
 	    	sound.resume();    	
-	        game.physics.arcade.accelerationFromRotation(player.rotation, 200, player.body.acceleration);
+	        game.physics.arcade.accelerationFromRotation(player.rotation, max_velocity, player.body.acceleration);
 	    }else{
 	    	player.animations.play('still', 20, true);
 	    	sound.pause();
@@ -39,21 +39,23 @@ function update() {
 	    if (cursors.left.isDown)	player.body.angularVelocity = -300;	    
 	    else if (cursors.right.isDown)	player.body.angularVelocity = 300;
 	    else	player.body.angularVelocity = 0;
+	    
+	    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && !keyboard_down) {	    	
+    		fireBullet();
+    		keyboard_down = true; 
+    		ammo--;
+	    }
+	    if(!game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))  	keyboard_down = false;
+	    
 	    screenWrap(player);
 	   	bullets.forEachExists(screenWrap, this);
-	    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-	    	if(ammo > 0) {
-	    		fireBullet(); 
-	    		ammo--;	   		
-	    	}	
-	    } 	    
 	    asteroids.forEachExists(screenWrap, this);  //Screen wrapping to make asteroids go to top of screen when at edge
 	    game.physics.arcade.overlap(player, asteroids, collideAsteroid, null, this);	    //collision detections
 		game.physics.arcade.overlap(player, pickups, collidePickup, null, this);	
 		game.physics.arcade.overlap(bullets, asteroids, collideBulletAsteroid, null, this);
 	}else{
 		sound.pause();
-		//blast.pause();
+		
 	}
 }	
 

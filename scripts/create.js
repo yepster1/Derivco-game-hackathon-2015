@@ -5,14 +5,15 @@
 	debug     		  = true;
 	difference        = 0.3;
 	max_acceleration  = 1;
-	ammo              = 6;
+	ammo              = 3;
 	max_asteroids     = 15;
 	max_pickups       = 2;		
-	max_velocity      = 150;
+	max_velocity      = 200;
 	drag              = 50;
 	bulletTime        = 0;
-	pickup_bonus_ammo = 5;
+	pickup_bonus_ammo = 2;
 	pickup_bonus_life = 100;
+	keyboard_down = false;
 function create(){
 	sound = game.add.sound('audio');		// setting up sound
 	blast = game.add.sound('blast');
@@ -52,8 +53,7 @@ function create(){
     bullets.setAll('scale.x', 0.5);
     bullets.setAll('scale.y', 0.5);
 
-	cursors = game.input.keyboard.createCursorKeys();
-	game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+	
 
 
 	
@@ -99,20 +99,22 @@ function updateShadowTexture(lightra){					//Shadow texture setup
 
 
 function fireBullet(){
-	if (game.time.now > bulletTime)
-    {
-        bullet = bullets.getFirstExists(false);
-
-        if (bullet)
-        {
-			bullet.reset(player.body.x + 16, player.body.y + 16);
-			bullet.lifespan = 2000;
-			bullet.rotation = player.rotation;
-			game.physics.arcade.velocityFromRotation(player.rotation, 400, bullet.body.velocity);
-			pew.play();
-			bulletTime      = game.time.now + 50;
-        }
-    }
+	if (hasAmmo()){
+		console.log("firing" + ammo)
+		if (game.time.now > bulletTime)
+	    {
+	        bullet = bullets.getFirstExists(false);
+	        if (bullet)
+	        {
+				bullet.reset(player.body.x + 16, player.body.y + 16);
+				bullet.lifespan = 2000;
+				bullet.rotation = player.rotation;
+				game.physics.arcade.velocityFromRotation(player.rotation, 400, bullet.body.velocity);
+				pew.play();
+				bulletTime      = game.time.now + 50;
+	        }
+	    }
+	}
 }
 
 function render(){
@@ -122,4 +124,8 @@ function render(){
 	asteroids.forEach(	function(asteroid)	{
 		game.debug.body(asteroid)
 	});
+}
+
+function hasAmmo(){
+	return ammo > 0 ? true: false;
 }
