@@ -10,7 +10,7 @@ function collideAsteroid(){ //Collision call back for overlap between rocket shi
 function collidePickup(){					//Collision of rocket with pickup - > callback of overlap
 	light += pickup_bonus_life;
 	ammo += pickup_bonus_ammo;
-	pickups.forEachExists(update_drop, this);	
+	pickups.forEachExists(powerup.createDrop, this);	
 }
 
 

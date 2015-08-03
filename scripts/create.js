@@ -11,7 +11,7 @@
 	max_velocity      = 200;
 	drag              = 50;
 	bulletTime        = 0;
-	pickup_bonus_ammo = 2;
+	pickup_bonus_ammo = 3;
 	pickup_bonus_life = 100;
 	keyboard_down = false;
 function create(){
@@ -42,7 +42,9 @@ function create(){
 	
 	asteroids               = game.add.group();			//Initialising asteroids
 	asteroids.enableBody    = true;
-	create_drop();
+	for (var i = 0; i < max_pickups; i++) {
+		powerup.createDrop();
+	}
 	
 	bullets                 = game.add.group();				//Declaring and initialising bullet objects and scaling
 	bullets.enableBody      = true;
@@ -52,10 +54,6 @@ function create(){
     bullets.setAll('anchor.y', 0.5);
     bullets.setAll('scale.x', 0.5);
     bullets.setAll('scale.y', 0.5);
-
-	
-
-
 	
 	for (var i= 0; i < max_asteroids; i++) {	//Create Initial asteroids
 		createAsteroid();		
@@ -99,8 +97,7 @@ function updateShadowTexture(lightra){					//Shadow texture setup
 
 
 function fireBullet(){
-	if (hasAmmo()){
-		console.log("firing" + ammo)
+	if (hasAmmo()){		
 		if (game.time.now > bulletTime)
 	    {
 	        bullet = bullets.getFirstExists(false);

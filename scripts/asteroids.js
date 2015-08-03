@@ -1,10 +1,8 @@
 //By Oliver De Bruin and Cary Small from UCT
 function createAsteroid(){
-	vals = checkSpawn();
-	x = vals[0];
-	y = vals[1];
-	if((Math.round(Math.random()*3)+1) == 1)	var asteroid = asteroids.create(x, y, 'asteroid_big');
-	else	var asteroid = asteroids.create(x, y, 'asteroid_small');
+	coords = checkSpawn();
+	if((Math.round(Math.random()*3)+1) == 1)	var asteroid = asteroids.create(coords[0], coords[1], 'asteroid_big');
+	else	var asteroid = asteroids.create(coords[0], coords[1], 'asteroid_small');
 	asteroid.body.acceleration.set(max_acceleration);	
 	asteroid.body.setSize(asteroid.width*0.80, asteroid.height*0.8, asteroid.width*0.1, asteroid.height*0.1);
 }
