@@ -33,7 +33,7 @@ function create(){
 	player.scale.setTo(0.6,0.6);	
 	
 	game.physics.arcade.enable(player);	//setting physcis of the ship
-	player.body.setSize(player.width*0.999, player.height*0.999, player.width*0.001, player.height*0.001); //chaning bounds
+	//player.body.setSize(player.width*0.999, player.height*0.999, player.width*0.001, player.height*0.001); //chaning bounds
 	
 	movement();		
 	startTime               = game.time.time;
@@ -114,14 +114,14 @@ function fireBullet(){
 	}
 }
 
-function render(){
+/*function render(){
 	console.log("test");
 	game.debug.bodyInfo(player, 32, 32);
 	game.debug.body(player);
-	asteroids.forEach(	function(asteroid)	{
-		game.debug.body(asteroid)
-	});
+	
 }
+*/
+
 
 function hasAmmo(){
 	return ammo > 0 ? true: false;

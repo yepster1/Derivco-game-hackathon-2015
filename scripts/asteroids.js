@@ -1,6 +1,6 @@
 //By Oliver De Bruin and Cary Small from UCT
 function createAsteroid(){
-	coords = checkSpawn();
+	var coords = checkSpawn();
 	if((Math.round(Math.random()*3)+1) == 1)	var asteroid = asteroids.create(coords[0], coords[1], 'asteroid_big');
 	else	var asteroid = asteroids.create(coords[0], coords[1], 'asteroid_small');
 	asteroid.body.acceleration.set(max_acceleration);	
@@ -14,6 +14,5 @@ function checkSpawn(){
 		x = Math.round(Math.random()*game.width)+1;
 		y = Math.round(Math.random()*game.height)+1;
 	}
-
 	return [x, y];
 }
