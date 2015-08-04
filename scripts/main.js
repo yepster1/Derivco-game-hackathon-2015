@@ -53,6 +53,7 @@ function update() {
 	    game.physics.arcade.overlap(player, asteroids, collideAsteroid, null, this);	    //collision detections
 		game.physics.arcade.overlap(player, pickups, collidePickup, null, this);	
 		game.physics.arcade.overlap(bullets, asteroids, collideBulletAsteroid, null, this);
+		game.physics.arcade.overlap(bullets, pickups, collideBulletPickup, null, this);
 	}else{
 		sound.pause();
 		

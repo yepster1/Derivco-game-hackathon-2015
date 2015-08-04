@@ -13,6 +13,14 @@ function collidePickup(){					//Collision of rocket with pickup - > callback of 
 	pickups.forEachExists(powerup.respawnDrops, this);	
 }
 
+function collideBulletPickup(bullet){
+	light += pickup_bonus_life;
+	ammo += pickup_bonus_ammo;
+	bullet.kill();
+	pickups.forEach(function(sprite){
+		powerup.respawnDrops(sprite)
+	});
+}
 
 function collideBulletAsteroid(bullet, asteroid){	//Collision of bullet with asteroid -> callback of overlap
     asteroid.kill();

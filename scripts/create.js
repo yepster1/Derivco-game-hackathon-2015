@@ -2,13 +2,13 @@
 	gameover          = false;
 	render            = true;
 	light             = 300;
-	debug     		  = true;
+	debug     		  = false;
 	difference        = 0.3;
 	max_acceleration  = 1;
 	ammo              = 3;
 	max_asteroids     = 15;
 	max_pickups       = 2;		
-	max_velocity      = 200;
+	max_velocity      = 300;
 	drag              = 50;
 	bulletTime        = 0;
 	pickup_bonus_ammo = 3;
