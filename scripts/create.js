@@ -1,10 +1,10 @@
 //By Oliver De Bruin and Cary Small from UCT	
 
 function create(){
-	sound = game.add.sound('audio');		// seting up sound
+	sound = game.add.sound('audio', 0.3, true);		// seting up sound
 	blast = game.add.sound('blast');
 	pew   = game.add.sound('pew');
-	theme = game.add.sound('theme');	
+	theme = game.add.sound('theme', 0.5, true);	
 	theme.play();
 	sound.play();
 	

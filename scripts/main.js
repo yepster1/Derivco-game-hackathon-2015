@@ -41,8 +41,7 @@ function update() {
 	    else	player.body.angularVelocity = 0;
 	    
 	    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && !keyboard_down) {	  
-		    if (hasAmmo()){  	
-		    	console.log(ammo)
+		    if (hasAmmo()){
 	    		fireBullet();
 	    		keyboard_down = true; 
 	    		ammo--;
@@ -59,7 +58,6 @@ function update() {
 		game.physics.arcade.overlap(bullets, pickups, collideBulletPickup, null, this);
 	}else{
 		sound.pause();
-		
 	}
 }	
 

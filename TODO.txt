@@ -1,0 +1,20 @@
+# Redo sound for moving forward with same concept as space for shooting/ look for permanent solution. - > causing lag?
+
+# Scaling of asteroids + more sprite objects
+
+# MAX LIGHT 600
+
+# Remove rendering from destroyed obj in debug mode
+
+# Change rotation speed based on difficulty?
+
+# Re do game state and game object initialising / Re do code using OOP practice.
+
+# Powerups etc speed shield - > new sprite shield image in assets
+
+# Splitting big asteroids into smaller ones
+
+# Multiplayer? wont work
+
+# Scrolling:
+http://phaser.io/docs/2.4.2/Phaser.TilemapLayer.html

@@ -1,5 +1,5 @@
-if(debug) var game = new Phaser.Game(800, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
-else var game = new Phaser.Game(800, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
+if(debug) var game = new Phaser.Game(800, 600, Phaser.WEBGL, '', { preload: preload, create: create, update: update, render: render });
+else var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function init(){		
 	
