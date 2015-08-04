@@ -1,21 +1,7 @@
 //By Oliver De Bruin and Cary Small from UCT	
-	gameover          = false;
-	render            = true;
-	light             = 300;
-	debug     		  = false;
-	difference        = 0.3;
-	max_acceleration  = 1;
-	ammo              = 3;
-	max_asteroids     = 15;
-	max_pickups       = 2;		
-	max_velocity      = 300;
-	drag              = 50;
-	bulletTime        = 0;
-	pickup_bonus_ammo = 3;
-	pickup_bonus_life = 100;
-	keyboard_down = false;
+
 function create(){
-	sound = game.add.sound('audio');		// setting up sound
+	sound = game.add.sound('audio');		// seting up sound
 	blast = game.add.sound('blast');
 	pew   = game.add.sound('pew');
 	theme = game.add.sound('theme');	

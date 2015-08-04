@@ -17,4 +17,8 @@ function render() {
 		game.debug.body(asteroid)
 	});
 
+    pickups.forEach(function(pickup){
+        game.debug.body(pickup);
+    });
+
 }
